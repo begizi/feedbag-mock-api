@@ -28,7 +28,15 @@ those internet based tools.
 
 ```
 $ git clone git@github.com:begizi/feedbag-mock-api.git
+
+// For Mac
 $ ./feedbag-mock-api/serve -port 3000
+
+// For Linux
+$ ./feedbag-mock-api/serve.linux -port 3000
+
+//For Windows
+$ ./feedbag-mock-api/serve.exe -port 3000
 ```
 
 Thats it.
