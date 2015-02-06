@@ -1,11 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+
+	"github.com/mojotech/feedbag/feedbag/template"
 )
 
 var (
@@ -26,9 +29,13 @@ func activityHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func templateHandler(w http.ResponseWriter, r *http.Request) {
-	file, err := ioutil.ReadFile("./responses/template.json")
-	checkErr(err, "File read error")
-	w.Write(file)
+	templates, err := template.ParseDir("./templates")
+	checkErr(err, "Failed to read templates")
+
+	res, err := json.Marshal(templates)
+	checkErr(err, "Failed to marshal templates")
+
+	w.Write(res)
 }
 
 func checkErr(err error, message string) {
